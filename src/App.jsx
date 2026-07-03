@@ -252,25 +252,6 @@ function uid(prefix = "id") {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
-async function storageGet(key, shared) {
-  try {
-    const val = localStorage.getItem(key);
-    return val ? { value: val } : null;
-  } catch (e) {
-    return null;
-  }
-}
-
-async function storageSet(key, value, shared) {
-  try {
-    localStorage.setItem(key, value);
-    return true;
-  } catch (e) {
-    console.error("Error guardando", key, e);
-    return false;
-  }
-}
-
 export default function App() {
   const [screen, setScreen] = useState("home"); // home, settings, gate, instructors, player, history
   const [loading, setLoading] = useState(true);
