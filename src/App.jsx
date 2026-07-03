@@ -120,21 +120,6 @@ const TYPE_META = {
   meditacion: { label: "Meditación", icon: Sparkles, color: "#1B4965" },
 };
 
-function base64Size(base64) {
-  if (!base64) return 0;
-  const clean = base64.split(",").pop() || "";
-  return Math.ceil((clean.length * 3) / 4);
-}
-
-function blobToBase64(blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
-
 // Cloudinary — subida de audios sin límite de tamaño
 const CLOUDINARY_CLOUD_NAME = "wjoapyux";
 const CLOUDINARY_UPLOAD_PRESET = "aquiestoy_audio"; // unsigned preset (lo creamos abajo)
@@ -675,11 +660,6 @@ function SessionEditor({ session, onSave, onCancel }) {
     }
     if (steps.some((st) => !st.name.trim() || !st.instruction.trim())) {
       setError("Cada paso necesita nombre e instrucción.");
-      return;
-    }
-    const totalAudioBytes = steps.reduce((sum, st) => sum + base64Size(st.audioData), 0);
-    if (totalAudioBytes > MAX_AUDIO_BYTES * 3) {
-      setError("Los audios de esta sesión pesan demasiado en conjunto. Acorta o quita alguna grabación.");
       return;
     }
     setError("");
