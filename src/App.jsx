@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Heart, Settings, Shield, Play, Pause, SkipForward, RotateCcw, X, Plus, Pencil, Trash2, ChevronLeft, Send, Lock, Wind, Flower2, Sparkles, Mic, Square, Volume2 } from "lucide-react";
-
-// Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBpVVCueidXAyjH7IPw7SjrnrXUYIfReHQ",
